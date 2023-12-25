@@ -1,8 +1,10 @@
     </form>
 </main>
-<?php include('../src/header.php'); ?>
 <div style="text-align:center;display:flex;justify-content:center; align-items:center;padding:0;">
-     &copy; Copy right mahmoud elabady 
+      Copy right &copy;
 </div>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

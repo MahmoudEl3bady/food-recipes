@@ -1,26 +1,28 @@
 <?php 
     include('../config/db_connection.php');
-  
+   session_start();
     if(isset($_POST['login'])){
         $username = $_POST['username'];
         $password = htmlspecialchars($_POST['password']);
-          session_start();
+         
+        $_SESSION['logged'] =0;  // check if user logged in 
         $_SESSION['username'] =$username;
 
-        $sql = "SELECT username,password FROM users WHERE username = '$username' AND password = '$password'";
+        $sql = "SELECT username,password ,id FROM users WHERE username = '$username' AND password = '$password'";
         $result = $con->query($sql);
         $data = mysqli_fetch_all($result,MYSQLI_ASSOC);
         // print_r($data);
         if($data){
-            header('Location:./home.php');
+        //    var_dump($data);
+            header('Location:./home.php?id='. $data[0]['id']);
+            //    <a href="./home.php?id=' . $data['id'] . '"  class="log-link">';
+
         }
         else {
             echo "Incorrect username and password";
         }
         
     }
-
-
 
 ?>
 
