@@ -1,5 +1,6 @@
-<?php include('../src/header.php')  ?>
-<nav class="navbar navbar-expand-lg navbar-light  fixed-top shadow " ; style="height:10dvh">
+<?php include('header.php');?>
+
+<nav class="navbar navbar-expand-lg navbar-light  fixed-top shadow bg-light" ; style="height:10dvh">
       <div class="container">
         <a
           href="../public/home.php"
@@ -38,10 +39,6 @@
               <a href="../public/deserts.php" class="nav-link">Deserts</a>
             </li>
           </ul>
-          <a href="../public/register.php" class="btn text-white " style="background-color: #4caf50; <?php isset($_SESSION['logged'])?"  visibility: hidden;
-":"" ?>"
-            >Sign up</a
-          >
         </div>
       </div>
     </nav>

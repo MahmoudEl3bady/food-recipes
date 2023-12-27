@@ -45,12 +45,14 @@
           </div>
         </div>
 </nav>
+
+<section class="home-sec">
       <?php include('../src/header.php')?>
-      <div class="grid-container " style="padding-top:100px;">
+   <div class="grid-container " style="padding-top:100px;">
   <?php include('../config/db_connection.php');
 
           session_start();
-          $sql ="SELECT * FROM recipes;";
+          $sql ="SELECT * FROM recipes ;";
           $result = $con->query($sql);
           $row = mysqli_fetch_all($result,MYSQLI_ASSOC);   
           // var_dump($row);
@@ -99,14 +101,12 @@
               ],
               // Add more card data as needed
           ];
-            $user_id = $_SESSION['user_id'];
+            $user_id = isset($_SESSION['user_id'])?$_SESSION['user_id']:"";
               if(isset($_GET['r_id'])){
 
                 $rec_id = $_GET['r_id'];
             
             
-                // var_dump($aaa);
-
               $stmt = $con->prepare("INSERT INTO favorites (u_id, r_id) VALUES (?, ?)");
               $stmt->bind_param("ii", $user_id, $rec_id);
 
@@ -119,26 +119,23 @@
               $stmt->close();
 
             }
-      foreach ($row as $index => $card) {
-          $cardId = 'card-' . $card['r_id']; // Generate a unique ID for each card
-          
-          echo '<a href="./recipe.php?r_id=' . $cardId .'?id=' .$card['id']. '"  class="log-link">';
-          echo '<div class="card" style="height: 100%;">';
-          echo '<img class="card-img-top img-fluid" style="height:80%" src="data:image;base64,'.base64_encode($card['image']). '" alt="Image">';
-          echo '<h3 class="card-title">' . $card["name"] . '</h3>';
-          echo '<p class="card-text">' . $card["short_desc"] . '</p>';
-          echo '<a href="./home.php?r_id=' .$card['r_id'].'?id='.$user_id.'">Save</a>';
+    foreach ($row as $index => $card) {
+    $cardId = 'card-' . $card['r_id']; // Generate a unique ID for each card
+    echo '<div class="card position-relative" style="width: 18rem;">';
+    echo '<img class="card-img-top" src="data:image;base64,'.base64_encode($card['image']). '" alt="Image">';
+    echo '<div class="card-body">';
+    echo '<h5 class="card-title">' . $card["name"] . '</h5>';
+    echo '<p class="card-text">' . $card["short_desc"] . '</p>';
+    echo '<a href="./home.php?r_id=' .$card['r_id'].'?id='.$user_id.'" class="btn btn- position-absolute "  style="top:0;left:0;"><div class="text-light"><i class="fa-regular fa-bookmark text-light fs-2"></i></div> </a>';
+    echo '<a href="./recipe.php?r_id=' . $cardId .'?id=' .$card['id']. '" class="btn btn-outline-success  position-absolute w-50" style="bottom:3px;left:25%;background-:#9da28c;">Details</a>';
+    echo '</div>';
+    echo '</div>';
+}
 
-          // echo '<p class="card-text">' . $card["description"] . '</p>';
-          echo '</div>';
-          echo '</a>';
-
-              
-
-        
-      }
   ?>
       </div>
-
+</section>
       <?php include('../src/footer.php');?>
+      <?php //echo $user_name_;?>
+
     
