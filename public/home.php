@@ -46,7 +46,7 @@
         </div>
 </nav>
 
-<section class="home-sec">
+<section class="home-sec " style="">
       <?php include('../src/header.php')?>
    <div class="grid-container " style="padding-top:100px;">
   <?php include('../config/db_connection.php');
@@ -121,11 +121,11 @@
             }
     foreach ($row as $index => $card) {
     $cardId = 'card-' . $card['r_id']; // Generate a unique ID for each card
-    echo '<div class="card position-relative" style="width: 18rem;">';
+    echo '<div class="card position-relative h-auto" style="width: 18rem;">';
     echo '<img class="card-img-top" src="data:image;base64,'.base64_encode($card['image']). '" alt="Image">';
     echo '<div class="card-body">';
-    echo '<h5 class="card-title">' . $card["name"] . '</h5>';
-    echo '<p class="card-text">' . $card["short_desc"] . '</p>';
+    echo '<h5 class="card-title fw-bold fs-3">' . $card["name"] . '</h5>';
+    echo '<p class="card-text text-secondary fs-5 fw-light">' . $card["short_desc"] . '</p>';
     echo '<a href="./home.php?r_id=' .$card['r_id'].'?id='.$user_id.'" class="btn btn- position-absolute "  style="top:0;left:0;"><div class="text-light"><i class="fa-regular fa-bookmark text-light fs-2"></i></div> </a>';
     echo '<a href="./recipe.php?r_id=' . $cardId .'?id=' .$card['id']. '" class="btn btn-outline-success  position-absolute w-50" style="bottom:3px;left:25%;background-:#9da28c;">Details</a>';
     echo '</div>';
